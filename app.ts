@@ -43,6 +43,7 @@ wss.on('connection', (ws) => {
 		handler?.(obj.payload) 
 	//	checkPlayer(obj.playerId)
 		console.log(obj)
+		console.log(obj.payload)
 	})
 })
 
