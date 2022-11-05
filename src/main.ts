@@ -1,5 +1,5 @@
 import { Server } from 'ws'
-import { PlayerUpdate, Message, Login } from './interfaces'
+import { PlayerUpdate, Message, Login, Client } from './interfaces'
 const wss = new Server({ port: 8080 }, () => {
 	console.log('server started')
 })
@@ -13,21 +13,15 @@ const wss = new Server({ port: 8080 }, () => {
 
 
 
-var players: string[] = []
-function checkPlayer(id: string) {
-	players.forEach(item => {
-		if (item == id) {
-			return true
-		}
-	})
-	players.push(id)
-    console.log('player '+id+' connected')
-    return false
+var players: Client[] = []
+function addPlayer(client: Client) {
+	players.push(client)
+    console.log('player '+client.playerId+' connected')
 }
 
 
 function onLogin(payload: Login) {
-    checkPlayer(payload.playerId)
+    //addPlayer(payload.playerId)
 }
 
 function onPlayerUpdate(payload: PlayerUpdate){

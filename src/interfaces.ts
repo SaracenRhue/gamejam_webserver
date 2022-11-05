@@ -1,27 +1,28 @@
 import type { WebSocket } from 'ws';
 export interface Message<T> {
-	name: string;
-	payload: T;
+  name: string;
+  payload: T;
 }
 
 export interface PlayerUpdate {
-	x: number;
-	y: number;
-	playerId: string;
-	angle: number;
+  pos: { x: number; y: number };
+  playerId: string;
+  angle: number;
 }
 
 export interface Player {
-	x: number;
-	y: number;
-	angle: number;
+  pos: { x: number; y: number };
+  angle: number;
 }
 
 export interface Login {
-    playerId: string
+  playerId: string;
 }
+
 export interface Client {
-	uuid: string;
-	socket: WebSocket;
-	player: Player;
+  playerId: string;
+  socket: WebSocket;
+  player: Player;
 }
+
+export interface PlayerJoined extends PlayerUpdate {}
