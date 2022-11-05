@@ -17,6 +17,9 @@ export interface Player {
 	angle: number;
 }
 
+export interface Login {
+    playerId: string
+}
 export interface Client {
 	uuid: string;
 	socket: WebSocket;
