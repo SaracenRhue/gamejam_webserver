@@ -1,9 +1,20 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "watch": true,
-    "lib": ["dom", "es2017", "ESNext"],
-    "allowJs": true,
-    "strict": true
-  }
+	"compilerOptions": {
+		"target": "ESNEXT",
+		"module": "commonjs",
+		"outDir": "./dist",
+		"removeComments": true,
+		"strict": true,
+		"strictPropertyInitialization": false,
+		"noFallthroughCasesInSwitch": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowJs": true,
+		"typeRoots": ["./src/types", "./node_modules/@types"]
+	},
+	"exclude": ["node_modules"],
+	"include": ["./src/**/*.tsx", "./src/**/*.ts"]
 }
