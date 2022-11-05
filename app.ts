@@ -3,17 +3,6 @@ const wss = new Server({ port: 8080 }, () => {
 	console.log('server started')
 })
 
-interface Message<T> {
-	name: string
-	payload: T
-}
-
-interface PlayerUpdate {
-	x: number
-	y: number
-	playerId: string
-	angle: number
-}
 
 // const message: Message<PlayerUpdate> = {
 // 	name: 'playerUpdate',
