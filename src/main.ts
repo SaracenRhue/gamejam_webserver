@@ -1,5 +1,5 @@
 import { Server } from 'ws'
-import './interfaces'
+import { PlayerUpdate, Message } from './interfaces'
 const wss = new Server({ port: 8080 }, () => {
 	console.log('server started')
 })
@@ -12,11 +12,11 @@ const wss = new Server({ port: 8080 }, () => {
 
 var players: string[] = []
 function checkPlayer(id: string) {
-	for (let i = 0; i < players.length; i++) {
-		if (players[i] == id) {
+	players.forEach(item => {
+		if (item == id) {
 			return true
 		}
-	}
+	})
 	return false
 }
 
