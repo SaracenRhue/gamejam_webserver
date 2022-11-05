@@ -4,11 +4,11 @@ import {
   Login,
   PlayerJoined,
   Message,
-  PlayerUpdate,
+  PlayerUpdate, Handler
 } from './interfaces'
 
 export const clients: Client[] = []
-type Handler<T> = (ws: WebSocket, payload: T) => void
+
 
 const onLogin: Handler<Login> = (socket, login) => {
   broadcast<PlayerJoined>(socket, {
@@ -30,19 +30,7 @@ const onLogin: Handler<Login> = (socket, login) => {
 
 const onPlayerUpdate: Handler<PlayerUpdate> = (socket, payload) => {
   broadcast<PlayerUpdate>(socket, { name: 'PlayerUpdate', payload })
-  console.log(payload)
-  //setTimeout(() => {
-  //   socket.send(
-  //     JSON.stringify({
-  //       name: 'PlayerUpdate',
-  //       payload: {
-  //         playerId: 'penis',
-  //         pos: { x: payload.pos.x, y: payload.pos.y },
-  //         angle: 0,
-  //       },
-  //     })
-  //   )
-  //  }, 1000)
+  //console.log(payload)
 }
 
 function broadcast<T>(socket: WebSocket, message: Message<T>) {
@@ -59,28 +47,17 @@ export const handlers: { [key: string]: Handler<any> } = {
   PlayerUpdate: onPlayerUpdate,
 }
 
-function randomCoord() {
-  return Math.random() * 10
-}
-
 const wss = new Server({ port: 8080 }, () => {
   console.log('Server started 🚀')
 })
 
 wss.on('connection', (ws) => {
   console.log('Client connectect')
-  //   setTimeout(() => {
-  //     ws.send(
-  //       JSON.stringify({
-  //         name: 'PlayerJoined',
-  //         payload: { playerId: 'penis' },
-  //       })
-  //     )
 
   ws.on('message', (data) => {
     try {
       const obj = JSON.parse(data.toString())
-      console.log(obj)
+      //console.log(obj)
       const handler = handlers[obj.name as any]
       handler?.(ws, obj.payload)
     } catch (ex) {

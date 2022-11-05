@@ -26,3 +26,5 @@ export interface Client {
 }
 
 export interface PlayerJoined extends PlayerUpdate {}
+
+export type Handler<T> = (ws: WebSocket, payload: T) => void;
